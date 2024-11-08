@@ -18,7 +18,7 @@
       });
       await navigateTo("/dashboard");
     } catch (error: any) {
-      useToastError(String(error.statusCode), error.data.message);
+      useToastError("Login Gagal", error.data.message);
     } finally {
       isLoading.value = false;
     }
@@ -31,14 +31,9 @@
     <UCard class="w-full max-w-md">
       <div class="space-y-6">
         <div class="text-center">
-          <div class="pointer-events-none mb-2">
-            <UIcon
-              name="i-heroicons-lock-closed"
-              class="h-8 w-8 flex-shrink-0 text-gray-900 dark:text-white"
-            />
-          </div>
+          <NuxtImg src="/logo.webp" width="200" height="200" alt="logo" />
           <div class="text-2xl font-bold text-gray-900 dark:text-white">
-            Selamat Datang
+            Selamat Datang!
           </div>
         </div>
         <UForm

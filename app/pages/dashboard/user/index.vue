@@ -190,25 +190,6 @@
         <template #isActive-header="{ column }">
           <div class="text-center">{{ column.label }}</div>
         </template>
-        <template #gender-data="{ row }">
-          <div class="flex justify-center">
-            <UBadge
-              size="xs"
-              :label="row.gender == 'laki' ? 'Laki - Laki' : 'Perempuan'"
-              color="blue"
-              variant="solid"
-              class="rounded-full"
-            />
-          </div>
-        </template>
-        <template #gender-header="{ column }">
-          <div class="text-center">{{ column.label }}</div>
-        </template>
-        <template #noTelepon-data="{ row }">
-          <NuxtLink :href="`https://wa.me/${row.noTelepon}`" target="_blank">
-            {{ row.noTelepon }}
-          </NuxtLink>
-        </template>
       </AppTable>
     </UCard>
   </main>
