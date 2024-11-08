@@ -15,7 +15,7 @@ export default eventHandler(async (event) => {
   const existingUser = await getUserByUsername(res.username);
 
   if (!existingUser) {
-    return createError({
+    throw createError({
       message: "Username atau password salah",
       statusCode: 401,
     });
@@ -24,8 +24,15 @@ export default eventHandler(async (event) => {
   const validPassword = await verify(existingUser.password, res.password);
 
   if (!validPassword) {
-    return createError({
+    throw createError({
       message: "Username atau password salah",
+      statusCode: 401,
+    });
+  }
+
+  if (!existingUser.isActive) {
+    throw createError({
+      message: "Akun anda belum teraktivasi",
       statusCode: 401,
     });
   }

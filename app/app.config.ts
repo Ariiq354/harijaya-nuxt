@@ -1,5 +1,6 @@
 export default defineAppConfig({
   ui: {
+    primary: "indigo",
     card: {
       ring: "dark:ring-gray-700",
     },

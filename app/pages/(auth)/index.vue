@@ -30,9 +30,9 @@
     <Title>Login</Title>
     <UCard class="w-full max-w-md">
       <div class="space-y-6">
-        <div class="text-center">
-          <NuxtImg src="/logo.webp" width="200" height="200" alt="logo" />
-          <div class="text-2xl font-bold text-gray-900 dark:text-white">
+        <div class="flex flex-col items-center text-center">
+          <NuxtImg src="/logo.webp" width="150" height="150" alt="logo hrj" />
+          <div class="mt-2 text-2xl font-bold text-gray-900 dark:text-white">
             Selamat Datang!
           </div>
         </div>

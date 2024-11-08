@@ -9,7 +9,7 @@
   import { json2Csv } from "~/utils";
 
   onMounted(() => {
-    defineTopbarTitle("User");
+    defineTopbarTitle("Daftar User");
   });
 
   const { data, status, refresh } = await useLazyFetch("/api/users");
@@ -69,7 +69,7 @@
 
 <template>
   <main>
-    <Title>User</Title>
+    <Title>Daftar User</Title>
     <UModal v-model="modalOpen" prevent-close>
       <div class="px-4 py-5">
         <div class="mb-4 flex items-center justify-between">
