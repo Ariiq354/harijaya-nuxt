@@ -10,7 +10,7 @@ export const barangTable = sqliteTable("barang", {
   deskripsi: text().notNull(),
   satuan: text().notNull(),
   tipe: int().notNull(), // 1: mentah, 2: jadi
-  status: int().notNull(), // 1: tidak aktif, 2: aktif
+  status: int({ mode: "boolean" }).notNull(), // 0: tidak aktif, 1: aktif
   ...timestamp,
 });
 

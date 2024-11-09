@@ -75,6 +75,7 @@
           children: [
             {
               label: "Daftar Barang",
+              link: "/dashboard/barang",
             },
             {
               label: "Daftar Pelanggan",

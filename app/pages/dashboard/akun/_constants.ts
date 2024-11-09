@@ -2,12 +2,12 @@ import { z } from "zod";
 
 export const columns = [
   {
-    key: "name",
-    label: "Nama Supplier",
+    key: "kodeAkun",
+    label: "Kode Akun",
     sortable: true,
   },
   {
-    key: "alamat",
+    key: "namaAkun",
     label: "Nama Akun",
     sortable: true,
   },
@@ -16,6 +16,21 @@ export const columns = [
     label: "Kategori Akun",
     sortable: true,
   },
+];
+
+export const selectOptions = [
+  "Kas & setara kas",
+  "Piutang usaha",
+  "Persediaan barang",
+  "Aktiva tetap",
+  "Aktiva lainnya",
+  "Utang usaha",
+  "Utang lainnya",
+  "Modal usaha",
+  "Pendapatan usaha",
+  "Pendapatan lainnya",
+  "Biaya usaha",
+  "Biaya lainnya",
 ];
 
 export const schema = z.object({

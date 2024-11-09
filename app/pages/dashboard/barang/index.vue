@@ -3,17 +3,18 @@
   import {
     columns,
     getInitialFormData,
+    satuanOptions,
     schema,
-    selectOptions,
+    tipeOptions,
     type Schema,
   } from "./_constants";
   import { json2Csv } from "~/utils";
 
   onMounted(() => {
-    defineTopbarTitle("Daftar Akun");
+    defineTopbarTitle("Daftar Barang");
   });
 
-  const { data, status, refresh } = await useLazyFetch("/api/akun");
+  const { data, status, refresh } = await useLazyFetch("/api/barang");
 
   const state = ref(getInitialFormData());
 
@@ -22,7 +23,7 @@
   async function onSubmit(event: FormSubmitEvent<Schema>) {
     modalLoading.value = true;
     try {
-      await $fetch("/api/akun", {
+      await $fetch("/api/barang", {
         method: "POST",
         body: event.data,
       });
@@ -44,7 +45,7 @@
   async function clickDelete() {
     async function onDelete() {
       const idArray = selected.value.map((item) => item.id);
-      await $fetch("/api/akun", {
+      await $fetch("/api/barang", {
         method: "DELETE",
         body: {
           id: idArray,
@@ -67,14 +68,20 @@
 
 <template>
   <main>
-    <Title>Daftar Akun</Title>
-    <UModal v-model="modalOpen" prevent-close>
+    <Title>Daftar Barang</Title>
+    <UModal
+      v-model="modalOpen"
+      prevent-close
+      :ui="{
+        width: 'sm:max-w-2xl',
+      }"
+    >
       <div class="px-4 py-5">
         <div class="mb-4 flex items-center justify-between">
           <h3
             class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
           >
-            {{ state.id ? "Edit" : "Tambah" }} Akun
+            {{ state.id ? "Edit" : "Tambah" }} Barang
           </h3>
           <UButton
             color="gray"
@@ -91,24 +98,33 @@
           class="space-y-4"
           @submit="onSubmit"
         >
-          <UFormGroup label="Kode Akun" name="kodeAkun">
-            <UInput v-model="state.kodeAkun" :disabled="modalLoading" />
+          <UFormGroup label="Nama Barang" name="name">
+            <UInput v-model="state.name" :disabled="modalLoading" />
+          </UFormGroup>
+          <UFormGroup label="Deskripsi" name="deskripsi">
+            <UInput v-model="state.deskripsi" :disabled="modalLoading" />
           </UFormGroup>
 
-          <UFormGroup label="Nama Akun" name="namaAkun">
-            <UInput v-model="state.namaAkun" :disabled="modalLoading" />
-          </UFormGroup>
-
-          <UFormGroup label="Kategori Akun" name="kategoriAkun">
+          <UFormGroup label="Tipe Bahan" name="tipe">
             <USelectMenu
-              v-model="state.kategoriAkun"
-              :options="selectOptions"
+              v-model="state.tipe"
+              :options="tipeOptions"
+              option-attribute="name"
+              value-attribute="value"
               :disabled="modalLoading"
             />
           </UFormGroup>
 
-          <UFormGroup label="Deskripsi" name="deskripsi">
-            <UTextarea v-model="state.deskripsi" :disabled="modalLoading" />
+          <UFormGroup label="Satuan" name="satuan">
+            <USelectMenu
+              v-model="state.satuan"
+              :options="satuanOptions"
+              :disabled="modalLoading"
+            />
+          </UFormGroup>
+
+          <UFormGroup label="Status" name="status">
+            <UToggle v-model="state.status" :disabled="modalLoading" />
           </UFormGroup>
 
           <div class="flex w-full justify-end gap-2">
@@ -172,12 +188,27 @@
       </div>
       <AppTable
         v-model="selected"
-        label="Kelola Akun"
+        label="Kelola Barang"
         :loading="status === 'pending'"
         :data="data"
         :columns="columns"
         @edit-click="(e) => clickUpdate(e)"
-      />
+      >
+        <template #status-data="{ row }">
+          <div class="flex justify-center">
+            <UBadge
+              size="xs"
+              :label="row.status ? 'Aktif' : 'Tidak Aktif'"
+              :color="row.status ? 'emerald' : 'orange'"
+              variant="solid"
+              class="rounded-full"
+            />
+          </div>
+        </template>
+        <template #status-header="{ column }">
+          <div class="text-center">{{ column.label }}</div>
+        </template>
+      </AppTable>
     </UCard>
   </main>
 </template>
