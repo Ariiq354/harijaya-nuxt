@@ -78,6 +78,7 @@
             },
             {
               label: "Daftar Pelanggan",
+              link: "/dashboard/pelanggan",
             },
             {
               label: "Faktur Penjualan",
