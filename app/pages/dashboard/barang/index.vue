@@ -69,13 +69,7 @@
 <template>
   <main>
     <Title>Daftar Barang</Title>
-    <UModal
-      v-model="modalOpen"
-      prevent-close
-      :ui="{
-        width: 'sm:max-w-2xl',
-      }"
-    >
+    <UModal v-model="modalOpen" prevent-close>
       <div class="px-4 py-5">
         <div class="mb-4 flex items-center justify-between">
           <h3

@@ -71,7 +71,7 @@
       v-model="modalOpen"
       prevent-close
       :ui="{
-        width: 'sm:max-w-2xl',
+        width: 'sm:max-w-4xl',
       }"
     >
       <div class="px-4 py-5">

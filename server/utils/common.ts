@@ -25,7 +25,7 @@ export async function getNumber(
   const day = String(currentDate.getDate()).padStart(2, "0");
   const date = `${year}${month}${day}`;
 
-  const num = await db
+  const [result] = await db
     .select({
       num: sql<string>`
         CASE
@@ -38,5 +38,5 @@ export async function getNumber(
       like(column, sql`${code + "-"} || strftime('%Y%m%d', 'now') || '-%'`)
     );
 
-  return code + "-" + date + "-" + num[0].num;
+  return code + "-" + date + "-" + result.num;
 }
