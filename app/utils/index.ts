@@ -23,4 +23,8 @@ export function json2Csv(data: { [key: string]: any }[]) {
   URL.revokeObjectURL(url);
 }
 
+export function formatPhoneNumber(phoneNumber: string) {
+  return phoneNumber.replace(/(\d{4})(\d{4})(\d{4})/, "$1-$2-$3");
+}
+
 export type ExtractObjectType<T> = T extends (infer U)[] ? U : never;

@@ -10,5 +10,5 @@ export default defineNuxtConfig({
     databaseAuthToken: process.env.DATABASE_AUTH_TOKEN,
   },
 
-  ignorePrefix: "_",
+  // ignorePrefix: "_",
 });

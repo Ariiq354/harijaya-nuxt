@@ -20,14 +20,19 @@ export const supplierTable = sqliteTable("supplier", {
 
 export const fakturPembelianTable = sqliteTable("faktur_pembelian", {
   id: int().primaryKey({ autoIncrement: true }),
-  supplierId: text().references(() => supplierTable.id, {
-    onDelete: "set null",
-  }),
+  supplierId: text()
+    .notNull()
+    .references(() => supplierTable.id, {
+      onDelete: "set default",
+    }),
   noFaktur: text().notNull().unique(),
   tanggal: text().notNull(),
-  userId: text().references(() => userTable.id, {
-    onDelete: "set null",
-  }),
+  userId: text()
+    .notNull()
+    .references(() => userTable.id, {
+      onDelete: "set default",
+    })
+    .default(""),
   lampiran: text().notNull(),
   biayaKirim: int().notNull(),
   catatan: text().notNull(),

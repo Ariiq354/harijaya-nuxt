@@ -20,7 +20,10 @@ export const jurnalTable = sqliteTable("jurnal", {
   noReferensi: text().notNull(),
   nominal: int().notNull(),
   deskripsi: text().notNull(),
-  noAkun: text().references(() => akunTable.kodeAkun, { onDelete: "set null" }),
+  noAkun: text()
+    .notNull()
+    .references(() => akunTable.kodeAkun, { onDelete: "set default" })
+    .default(""),
   ...timestamp,
 });
 
@@ -47,9 +50,12 @@ export const pembayaranUtangItemTable = sqliteTable("pembayaran_utang_item", {
   noPembayaran: text()
     .notNull()
     .references(() => pembayaranUtangTable.id, { onDelete: "cascade" }),
-  noFaktur: text().references(() => fakturPembelianTable.noFaktur, {
-    onDelete: "set null",
-  }),
+  noFaktur: text()
+    .notNull()
+    .references(() => fakturPembelianTable.noFaktur, {
+      onDelete: "set default",
+    })
+    .default(""),
   nilai: int().notNull(),
   ...timestamp,
 });
@@ -81,9 +87,12 @@ export const pembayaranPiutangItemTable = sqliteTable(
       .references(() => pembayaranPiutangTable.noPembayaran, {
         onDelete: "cascade",
       }),
-    noFaktur: text().references(() => fakturPenjualanTable.noFaktur, {
-      onDelete: "set null",
-    }),
+    noFaktur: text()
+      .notNull()
+      .references(() => fakturPenjualanTable.noFaktur, {
+        onDelete: "set default",
+      })
+      .default(""),
     nilai: int().notNull(),
     ...timestamp,
   }

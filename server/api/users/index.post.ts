@@ -1,7 +1,7 @@
 import { hash } from "@node-rs/argon2";
 import { z } from "zod";
 
-const userSchema = z.object({
+const bodySchema = z.object({
   id: z.number().optional(),
   username: z.string(),
   password: z.string(),
@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
   protectFunction(event);
 
   const formData = await readValidatedBody(event, (body) =>
-    userSchema.parse(body)
+    bodySchema.parse(body)
   );
 
   const exist = await getUserByUsername(formData.username);

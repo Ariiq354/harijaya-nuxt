@@ -39,14 +39,20 @@ export const pelangganTable = sqliteTable("pelanggan", {
 
 export const fakturPenjualanTable = sqliteTable("faktur_penjualan", {
   id: int().primaryKey({ autoIncrement: true }),
-  pelangganId: text().references(() => pelangganTable.id, {
-    onDelete: "set null",
-  }),
+  pelangganId: text()
+    .notNull()
+    .references(() => pelangganTable.id, {
+      onDelete: "set default",
+    })
+    .default(""),
   noFaktur: text().notNull().unique(),
   tanggal: text().notNull(),
-  userId: text().references(() => userTable.id, {
-    onDelete: "set null",
-  }),
+  userId: text()
+    .notNull()
+    .references(() => userTable.id, {
+      onDelete: "set default",
+    })
+    .default(""),
   lampiran: text().notNull(),
   catatan: text().notNull(),
   ppn: int({ mode: "boolean" }).notNull(), // 0: tidak, 1: iya

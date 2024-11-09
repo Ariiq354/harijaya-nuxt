@@ -26,9 +26,11 @@
           children: [
             {
               label: "Daftar Akun",
+              link: "/dashboard/akun",
             },
             {
               label: "Input Jurnal",
+              link: "/dashboard/jurnal",
             },
             {
               label: "Utang",
@@ -60,6 +62,7 @@
           children: [
             {
               label: "Daftar Supplier",
+              link: "/dashboard/supplier",
             },
             {
               label: "Faktur Pembelian",
